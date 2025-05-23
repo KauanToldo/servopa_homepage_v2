@@ -1,5 +1,5 @@
 looker.plugins.visualizations.add({
-    id: "servopa_homepage",
+    id: "servopa_homepage_v2",
     label: "Homepage",
     options: {
       
