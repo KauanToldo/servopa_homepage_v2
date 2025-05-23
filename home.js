@@ -65,6 +65,7 @@ looker.plugins.visualizations.add({
                 margin: 0;
                 margin-top: 2px;
                 color: white;
+                text-transform: capitalize;
             }
 
             .cards-container {
@@ -215,7 +216,7 @@ looker.plugins.visualizations.add({
         subtitle.classList = "subtitle";
         title.classList = "title";
         subtitle.textContent = "Olá, seja bem vindo(a) ao"
-        title.textContent = "Painel Geral"
+        title.textContent = `Painel de ${data[0]["grupos.grupo"]}`
 
         titlesDiv.appendChild(subtitle)
         titlesDiv.appendChild(title)
