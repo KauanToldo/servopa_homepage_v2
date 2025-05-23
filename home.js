@@ -150,10 +150,6 @@ looker.plugins.visualizations.add({
                 font-size: 14px;
             }
 
-            .search-container:focus {
-                border: 1px solid black;
-            }
-
             .select-container {
                 display: flex;
                 align-items: center;
@@ -178,13 +174,6 @@ looker.plugins.visualizations.add({
                 color:rgba(0, 0, 0, 0.5);
                 flex: 1;
                 background: white;;
-            }
-
-            .dropdown-icon {
-                width: 12px;
-                height: 12px;
-                margin-left: 8px;
-                pointer-events: none;
             }
 
         </style>
@@ -239,11 +228,10 @@ looker.plugins.visualizations.add({
 
         const cardsContainer = document.createElement('div');
         cardsContainer.classList = "cards-container";
-        cardsContainer.innerHTML = "Selecione uma pasta para visualizar o conteúdo";
+        load_cards();
         body.appendChild(cardsContainer);
 
         homeContainer.appendChild(body)
-
 
         console.log(queryResponse)
         console.log(data)
@@ -289,15 +277,19 @@ looker.plugins.visualizations.add({
             header.appendChild(selectContainer);
         }
 
-        function load_cards(selectedFolder) {
+        function load_cards(selectedFolder = null) {
             cardsContainer.innerHTML = "";  // limpa os cards anteriores
 
-            const filteredRows = data.filter(row => row['grupos.pasta'].value === selectedFolder);
+            let filteredRows;
 
-            title.textContent = `Painel de ${selectedFolder}`;
+            if (selectedFolder) {
+                filteredRows = data.filter(row => row['grupos.pasta'].value === selectedFolder);
+            } else {
+                filteredRows = data;
+            }
 
             if (filteredRows.length === 0) {
-                cardsContainer.innerHTML = "Nenhum painel disponível para esta pasta.";
+                cardsContainer.innerHTML = "Nenhum painel disponível.";
                 return;
             }
 
@@ -307,7 +299,7 @@ looker.plugins.visualizations.add({
                 card.id = `card${index}`;
 
                 const img = document.createElement('img');
-                img.src = row['paineis.imagem'].value
+                img.src = row['paineis.imagem'].value;
                 img.alt = "Imagem do painel";
                 img.classList = "card-img";
 
@@ -315,12 +307,12 @@ looker.plugins.visualizations.add({
                 infoDiv.classList = 'card-info-div';
 
                 const titleSpan = document.createElement('span');
-                titleSpan.classList = 'title-card'
+                titleSpan.classList = 'title-card';
                 titleSpan.textContent = row['paineis.painel'].value;
 
                 const icon = document.createElement('img');
                 icon.src = "https://cdn-icons-png.flaticon.com/512/5422/5422411.png";
-                icon.classList = 'icon-card'
+                icon.classList = 'icon-card';
                 icon.alt = "Redirecionar";
 
                 infoDiv.appendChild(titleSpan);
