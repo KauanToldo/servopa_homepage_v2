@@ -281,6 +281,15 @@ looker.plugins.visualizations.add({
             selectContainer.appendChild(select);
 
             header.appendChild(selectContainer);
+
+            select.addEventListener('focus', () => {
+                selectContainer.style.border = '1px solid black';
+            });
+
+            // Quando perde o foco
+            select.addEventListener('blur', () => {
+                selectContainer.style.border = '1px solid #ccc';
+            });
         }
 
         function load_cards(selectedFolder = null) {
@@ -353,6 +362,22 @@ looker.plugins.visualizations.add({
             searchContainer.appendChild(searchInput);
 
             header.appendChild(searchContainer);
+
+            searchInput.addEventListener('focus', () => {
+                searchContainer.style.border = '1px solid black';
+            });
+
+            // Quando perde o foco
+            searchInput.addEventListener('blur', () => {
+                searchContainer.style.border = '1px solid #ccc';
+            });
+
+            // Quando o usuário pressiona Enter
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    searchContainer.style.border = '1px solid #ccc';
+                }
+            });
         }
 
 }});
