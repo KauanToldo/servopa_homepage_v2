@@ -46,12 +46,14 @@ looker.plugins.visualizations.add({
 
             .titles-div {
                 padding-left: 50px;
+                margin-top: 50px;
             }
 
             .subtitle {
                 font-size: 12px;
                 margin: 0px;
                 font-weight: normal;
+                color: white;
             }
 
             .title {
@@ -59,6 +61,7 @@ looker.plugins.visualizations.add({
                 font-weight: bold;
                 margin: 0;
                 margin-top: 2px;
+                color: white;
             }
 
             .cards-container {
@@ -115,12 +118,10 @@ looker.plugins.visualizations.add({
             }
 
             .header-page {
-                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-top: 50px;
-                margin-bottom: 50px;
+                padding: 50px;
             }
 
             .search-container {
