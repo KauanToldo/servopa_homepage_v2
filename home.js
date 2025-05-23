@@ -44,11 +44,12 @@ looker.plugins.visualizations.add({
                 position: absolute;
                 top: 40px;
                 right: 40px;
+                filter: invert(1);
             }
 
             .titles-div {
                 padding-left: 50px;
-                margin-top: 50px;
+                margin-top: 80px;
             }
 
             .subtitle {
