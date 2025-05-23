@@ -41,7 +41,9 @@ looker.plugins.visualizations.add({
 
             #logo {
                 width: 150px;
-                margin-top: 40px
+                position: absolute;
+                top: 40px;
+                right: 40px;
             }
 
             .titles-div {
@@ -119,7 +121,7 @@ looker.plugins.visualizations.add({
 
             .header-page {
                 display: flex;
-                justify-content: space-between;
+                gap: 20px;
                 align-items: center;
                 padding: 50px;
             }
@@ -206,6 +208,9 @@ looker.plugins.visualizations.add({
 
         const body = document.createElement('div')
         body.classList = "body-page"
+
+        const imgLogo = document.createElement('img')
+        imgLogo.id = 'logo'
 
         const header = document.createElement('div')
         header.classList = "header-page"
