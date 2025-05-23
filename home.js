@@ -202,6 +202,7 @@ looker.plugins.visualizations.add({
 
         const imgLogo = document.createElement('img')
         imgLogo.id = 'logo';
+        imgLogo.src = "https://gruposervopa.com.br/themes/theme-grupo-servopa/assets/img/logos/servopa-grupo-branco.svg"
 
         const header = document.createElement('div')
         header.classList = "header-page"
@@ -255,9 +256,8 @@ looker.plugins.visualizations.add({
             select.id = 'folder-select';
 
             const placeholderOption = document.createElement('option');
-            placeholderOption.value = "";
-            placeholderOption.textContent = "Selecione uma pasta";
-            placeholderOption.disabled = true;
+            placeholderOption.value = "Todas";
+            placeholderOption.textContent = "Todos os paineis";
             placeholderOption.selected = true;
 
             select.appendChild(placeholderOption);
@@ -271,7 +271,11 @@ looker.plugins.visualizations.add({
 
             select.addEventListener('change', () => {
                 const selectedFolder = select.value;
-                load_cards(selectedFolder);
+                if (selectedFolder == "Todas") {
+                    load_cards();
+                } else {
+                    load_cards(selectedFolder);
+                }
             });
 
             selectContainer.appendChild(select);
