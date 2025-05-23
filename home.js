@@ -216,8 +216,6 @@ looker.plugins.visualizations.add({
         // Eliminar os duplicados
         folders = [...new Set(folders)];
 
-        create_menu();
-
         const body = document.createElement('div')
         body.classList = "body-page"
 
