@@ -161,7 +161,7 @@ looker.plugins.visualizations.add({
                 border-radius: 25px;
                 background-color: white;
                 padding: 10px 20px;
-                width: 200px;
+                width: 250px;
                 position: relative;
             }
 
@@ -174,7 +174,7 @@ looker.plugins.visualizations.add({
             .folder-select {
                 border: none;
                 outline: none;
-                font-size: 16px;
+                font-size: 14px;
                 color:rgba(0, 0, 0, 0.5);
                 flex: 1;
                 background: white;;
