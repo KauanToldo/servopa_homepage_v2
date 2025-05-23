@@ -157,10 +157,10 @@ looker.plugins.visualizations.add({
             .select-container {
                 display: flex;
                 align-items: center;
-                border: 1px solid black;
+                border: 1px solid #ccc;
                 border-radius: 25px;
                 background-color: white;
-                padding: 5px 10px;
+                padding: 10px 20px;
                 width: 200px;
                 position: relative;
             }
@@ -175,9 +175,9 @@ looker.plugins.visualizations.add({
                 border: none;
                 outline: none;
                 font-size: 16px;
+                color:rgba(0, 0, 0, 0.5);
                 flex: 1;
-                appearance: none; /* Remove estilo padrão do select */
-                background: transparent;
+                background: white;;
             }
 
             .dropdown-icon {
@@ -264,6 +264,14 @@ looker.plugins.visualizations.add({
             select.className = 'folder-select';
             select.id = 'folder-select';
 
+            const placeholderOption = document.createElement('option');
+            placeholderOption.value = "";
+            placeholderOption.textContent = "Selecione uma pasta";
+            placeholderOption.disabled = true;
+            placeholderOption.selected = true;
+
+            select.appendChild(placeholderOption);
+
             folders.forEach(folder => {
                 const option = document.createElement('option');
                 option.value = folder;
@@ -277,11 +285,6 @@ looker.plugins.visualizations.add({
             });
 
             selectContainer.appendChild(select);
-
-            const dropdownIcon = document.createElement('img');
-            dropdownIcon.src = "https://cdn-icons-png.flaticon.com/512/271/271210.png";
-            dropdownIcon.className = 'dropdown-icon';
-            selectContainer.appendChild(dropdownIcon);
 
             header.appendChild(selectContainer);
         }
