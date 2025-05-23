@@ -89,19 +89,19 @@ looker.plugins.visualizations.add({
                 background-color: #ffffff; 
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
                 border-radius: 12px; 
-                width: 300px; 
+                width: 350px; 
                 overflow: hidden; 
                 cursor: pointer;
             }
 
             .card-img {
                 width: 100%; 
-                height: 150px; 
+                height: 200px; 
                 object-fit: cover;
             }
 
             .card-info-div {
-                padding: 10px; 
+                padding: 20px; 
                 text-align: center; 
                 display: flex; 
                 align-items: center; 
@@ -201,7 +201,7 @@ looker.plugins.visualizations.add({
         body.classList = "body-page"
 
         const imgLogo = document.createElement('img')
-        imgLogo.id = 'logo'
+        imgLogo.id = 'logo';
 
         const header = document.createElement('div')
         header.classList = "header-page"
@@ -219,6 +219,7 @@ looker.plugins.visualizations.add({
         titlesDiv.appendChild(subtitle)
         titlesDiv.appendChild(title)
 
+        body.appendChild(imgLogo)
         body.appendChild(titlesDiv)
 
         create_filter_folder();
