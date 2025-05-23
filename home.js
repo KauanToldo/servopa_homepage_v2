@@ -135,6 +135,7 @@ looker.plugins.visualizations.add({
                 width: 50%;
                 padding: 5px 15px;
                 margin-right: 30px;
+                background-color: white;
             }
                 
             .search-icon {
