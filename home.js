@@ -38,56 +38,10 @@ looker.plugins.visualizations.add({
                 background-repeat: no-repeat;
                 display: flex;
             }
-            
-            .menu-container {
-                height: 100vh;
-                width: 300px;
-                background-color: #29479F;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                position: sticky;
-                top: 0;
-            }
 
             #logo {
                 width: 150px;
                 margin-top: 40px
-            }
-
-            .list-folders {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                padding: 0;
-                margin: 0;
-                margin-top: 80px;
-            }
-
-            .folder {
-                color: white;
-                cursor: pointer;
-                font-size: 16px;
-                list-style: none;
-            }
-
-            // .line {
-            //     background-color:rgba(255, 255, 255, 0.4);
-            //     height: 1px;
-            //     width: 150px;
-            //     margin-bottom: 30px;
-            // }
-
-            .folder-div {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                padding: 20px 30px;
-                transition: .2s ease-in-out;
-            }
-
-            .folder-div:hover {
-                background-color:rgb(29, 50, 112);
             }
 
             .titles-div {
@@ -196,6 +150,39 @@ looker.plugins.visualizations.add({
                 border: 1px solid black;
             }
 
+            .select-container {
+                display: flex;
+                align-items: center;
+                border: 1px solid black;
+                border-radius: 25px;
+                background-color: white;
+                padding: 5px 10px;
+                width: 200px;
+                position: relative;
+            }
+
+            .folder-icon-select {
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+            }
+
+            .folder-select {
+                border: none;
+                outline: none;
+                font-size: 16px;
+                flex: 1;
+                appearance: none; /* Remove estilo padrão do select */
+                background: transparent;
+            }
+
+            .dropdown-icon {
+                width: 12px;
+                height: 12px;
+                margin-left: 8px;
+                pointer-events: none;
+            }
+
         </style>
         `
 
@@ -235,7 +222,9 @@ looker.plugins.visualizations.add({
         titlesDiv.appendChild(subtitle)
         titlesDiv.appendChild(title)
 
-        header.appendChild(titlesDiv)
+        body.appendChild(titlesDiv)
+
+        create_filter_folder();
 
         create_search_bar();
 
@@ -255,44 +244,39 @@ looker.plugins.visualizations.add({
         this._tableContainer.appendChild(homeContainer);
         done();
 
-        function create_menu() {
-            const menuContainer = document.createElement('div');
-            menuContainer.classList.add('menu-container');
-            
-            const logoImg = document.createElement('img')
-            logoImg.src = "https://gruposervopa.com.br/themes/theme-grupo-servopa/assets/img/logos/servopa-grupo-branco.svg"
-            logoImg.id = 'logo';
-            menuContainer.appendChild(logoImg)
+        function create_filter_folder() {
+            const selectContainer = document.createElement('div');
+            selectContainer.className = 'select-container';
 
-            const listFoldersDiv = document.createElement('ul');
-            listFoldersDiv.classList = 'list-folders';
-            
+            const folderIcon = document.createElement('img');
+            folderIcon.src = "https://kauantoldo.github.io/servopa_homepage_v2/folder_icon.svg";
+            folderIcon.className = 'folder-icon-select';
+            selectContainer.appendChild(folderIcon);
+
+            const select = document.createElement('select');
+            select.className = 'folder-select';
+            select.id = 'folder-select';
+
             folders.forEach(folder => {
-                const folderDiv = document.createElement('div')
-                folderDiv.classList = 'folder-div'
-
-                const folderIcon = document.createElement('img')
-                folderIcon.src = "https://kauantoldo.github.io/servopa_homepage/folder_icon.svg"
-                folderIcon.classList = 'folder-icon'
-
-                const li = document.createElement('li');
-                li.textContent = folder;
-                li.classList.add('folder')
-
-
-                folderDiv.appendChild(folderIcon)
-                folderDiv.appendChild(li);
-                listFoldersDiv.appendChild(folderDiv);
-
-
-                folderDiv.addEventListener('click', () => {
-                    load_cards(folder);
-                });
-
+                const option = document.createElement('option');
+                option.value = folder;
+                option.textContent = folder;
+                select.appendChild(option);
             });
 
-            menuContainer.appendChild(listFoldersDiv);
-            homeContainer.appendChild(menuContainer);
+            select.addEventListener('change', () => {
+                const selectedFolder = select.value;
+                load_cards(selectedFolder);
+            });
+
+            selectContainer.appendChild(select);
+
+            const dropdownIcon = document.createElement('img');
+            dropdownIcon.src = "https://cdn-icons-png.flaticon.com/512/271/271210.png";
+            dropdownIcon.className = 'dropdown-icon';
+            selectContainer.appendChild(dropdownIcon);
+
+            header.appendChild(selectContainer);
         }
 
         function load_cards(selectedFolder) {
