@@ -216,7 +216,7 @@ looker.plugins.visualizations.add({
         subtitle.classList = "subtitle";
         title.classList = "title";
         subtitle.textContent = "Olá, seja bem vindo(a) ao"
-        title.textContent = `Painel de ${data[0]["grupos.grupo"]}`
+        title.textContent = `Painel ${data[0]["grupos.grupo"].value}`
 
         titlesDiv.appendChild(subtitle)
         titlesDiv.appendChild(title)
