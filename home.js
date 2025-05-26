@@ -379,6 +379,72 @@ looker.plugins.visualizations.add({
                     searchContainer.style.border = '1px solid #ccc';
                 }
             });
+
+            // Quando o usuário pressiona Enter
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    searchContainer.style.border = '1px solid #ccc';
+                    const searchTerm = searchInput.value.trim().toLowerCase();
+
+                    if (searchTerm === '') {
+                        // Se a busca estiver vazia, mostra todos os cards
+                        render_filtered_cards(data);
+                    } else {
+                        // Filtra apenas os painéis que possuem o termo no título
+                        const filteredRows = data.filter(row =>
+                            row['paineis.painel'].value.toLowerCase().includes(searchTerm)
+                        );
+
+                        render_filtered_cards(filteredRows);
+                    }
+                }
+            });
+        }
+
+        function render_filtered_cards(filteredRows) {
+            cardsContainer.innerHTML = "";  // limpa os cards anteriores
+
+            title.textContent = `Resultados da busca`;
+
+            if (filteredRows.length === 0) {
+                cardsContainer.innerHTML = "Nenhum painel encontrado para esta busca.";
+                return;
+            }
+
+            filteredRows.forEach((row, index) => {
+                const card = document.createElement('div');
+                card.classList = 'card';
+                card.id = `card${index}`;
+
+                const img = document.createElement('img');
+                img.src = row['paineis.imagem'].value;
+                img.alt = "Imagem do painel";
+                img.classList = "card-img";
+
+                const infoDiv = document.createElement('div');
+                infoDiv.classList = 'card-info-div';
+
+                const titleSpan = document.createElement('span');
+                titleSpan.classList = 'title-card';
+                titleSpan.textContent = row['paineis.painel'].value;
+
+                const icon = document.createElement('img');
+                icon.src = "https://cdn-icons-png.flaticon.com/512/5422/5422411.png";
+                icon.classList = 'icon-card';
+                icon.alt = "Redirecionar";
+
+                infoDiv.appendChild(titleSpan);
+                infoDiv.appendChild(icon);
+
+                card.appendChild(img);
+                card.appendChild(infoDiv);
+
+                card.addEventListener('click', function() {
+                    window.open(row['paineis.link'].value, '_blank');
+                });
+
+                cardsContainer.appendChild(card);
+            });
         }
 
 }});
